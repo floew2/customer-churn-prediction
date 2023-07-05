@@ -1,0 +1,10 @@
+root - INFO - Testing import_data: SUCCESS - Data imported.
+root - INFO - Testing create_target: SUCCESS - Created target 'churn'.
+root - INFO - Testing perform_eda: SUCCESS - Created Barplot_Marital_Status.png.
+root - INFO - Testing perform_eda: SUCCESS - Created Heatmap_Correlation.png.
+root - INFO - Testing perform_eda: SUCCESS - Created Histogram_Customer_Age.png.
+root - INFO - Testing perform_eda: SUCCESS - Created Histogram_Existing_Customer.png.
+root - INFO - Testing perform_eda: SUCCESS - Created Histplot_Kde_Total_Trans_Ct.png.
+root - INFO - SUCCESS: encoder generated Gender_Churn column.
+root - INFO - Testing perform_feature_engineering: SUCCESS
+root - INFO - Testing train_models: SUCCESS - Classification         reports and feature importance statistics calculated.
