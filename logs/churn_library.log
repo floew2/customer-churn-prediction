@@ -1,10 +1,179 @@
-root - INFO - Testing import_data: SUCCESS - Data imported.
-root - INFO - Testing create_target: SUCCESS - Created target 'churn'.
-root - INFO - Testing perform_eda: SUCCESS - Created Barplot_Marital_Status.png.
-root - INFO - Testing perform_eda: SUCCESS - Created Heatmap_Correlation.png.
-root - INFO - Testing perform_eda: SUCCESS - Created Histogram_Customer_Age.png.
-root - INFO - Testing perform_eda: SUCCESS - Created Histogram_Existing_Customer.png.
-root - INFO - Testing perform_eda: SUCCESS - Created Histplot_Kde_Total_Trans_Ct.png.
-root - INFO - SUCCESS: encoder generated Gender_Churn column.
-root - INFO - Testing perform_feature_engineering: SUCCESS
-root - INFO - Testing train_models: SUCCESS - Classification         reports and feature importance statistics calculated.
+2024-06-29 21:48:41,400 - root - INFO - SUCCESS (import_data): Data imported from data/bank_data.csv
+2024-06-29 21:48:41,409 - root - INFO - SUCCESS (create_target): Target variable Churn created
+2024-06-29 21:48:41,670 - root - INFO - ...SUCCESS: Churn distribution plot saved
+2024-06-29 21:48:42,043 - root - INFO - ...SUCCESS: Customer age distribution plot saved
+2024-06-29 21:48:44,203 - root - INFO - ...SUCCESS: Correlation heatmap plot saved
+2024-06-29 21:48:44,394 - root - INFO - ...SUCCESS: Marital status distribution plot saved
+2024-06-29 21:48:44,764 - root - INFO - ...SUCCESS: Total transaction distribution plot saved
+2024-06-29 21:48:44,774 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Gender
+2024-06-29 21:48:44,782 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Education_Level
+2024-06-29 21:48:44,791 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Marital_Status
+2024-06-29 21:48:44,801 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Income_Category
+2024-06-29 21:48:44,812 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Card_Category
+2024-06-29 21:48:44,833 - root - INFO - SUCCESS (perform_feature_engineering): Feature scaling & train-test split completed
+2024-06-29 21:48:44,833 - root - INFO - SUCCESS (_setup_param_grids): Initialized Random Forest model and grid search parameter grid
+2024-06-29 21:48:44,833 - root - INFO - SUCCESS (_setup_param_grids): Initialized Logistic Regression model and grid search parameter grid
+2024-06-29 21:49:35,920 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 21:49:36,155 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 21:49:36,286 - root - INFO - SUCCESS (train_models): rfc model trained and saved as pkl-file
+2024-06-29 21:49:36,542 - root - INFO - ...SUCCESS: rfc classification report saved
+2024-06-29 21:49:36,922 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 21:53:44,950 - root - INFO - SUCCESS (feature_importance_plot): Feature importance plot saved
+2024-06-29 21:53:46,049 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 21:53:46,050 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 21:53:46,053 - root - INFO - SUCCESS (train_models): logistic model trained and saved as pkl-file
+2024-06-29 21:53:46,274 - root - INFO - ...SUCCESS: logistic classification report saved
+2024-06-29 21:53:46,498 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 21:57:55,389 - root - INFO - SUCCESS (import_data): Data imported from data/bank_data.csv
+2024-06-29 21:57:55,397 - root - INFO - SUCCESS (create_target): Target variable Churn created
+2024-06-29 21:57:55,659 - root - INFO - ...SUCCESS: Churn distribution plot saved
+2024-06-29 21:57:56,025 - root - INFO - ...SUCCESS: Customer age distribution plot saved
+2024-06-29 21:57:58,755 - root - INFO - ...SUCCESS: Correlation heatmap plot saved
+2024-06-29 21:57:58,978 - root - INFO - ...SUCCESS: Marital status distribution plot saved
+2024-06-29 21:57:59,392 - root - INFO - ...SUCCESS: Total transaction distribution plot saved
+2024-06-29 21:57:59,400 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Gender
+2024-06-29 21:57:59,407 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Education_Level
+2024-06-29 21:57:59,415 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Marital_Status
+2024-06-29 21:57:59,424 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Income_Category
+2024-06-29 21:57:59,434 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Card_Category
+2024-06-29 21:57:59,454 - root - INFO - SUCCESS (perform_feature_engineering): Feature scaling & train-test split completed
+2024-06-29 21:57:59,454 - root - INFO - SUCCESS (_setup_param_grids): Initialized Random Forest model and grid search parameter grid
+2024-06-29 21:57:59,455 - root - INFO - SUCCESS (_setup_param_grids): Initialized Logistic Regression model and grid search parameter grid
+2024-06-29 21:58:51,912 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 21:58:52,138 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 21:58:52,299 - root - INFO - SUCCESS (train_models): rfc model trained and saved as pkl-file
+2024-06-29 21:58:52,556 - root - INFO - ...SUCCESS: rfc classification report saved
+2024-06-29 21:58:52,900 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 22:03:01,144 - root - INFO - SUCCESS (feature_importance_plot): Feature importance plot saved
+2024-06-29 22:03:01,975 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 22:03:01,975 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 22:03:01,979 - root - INFO - SUCCESS (train_models): logistic model trained and saved as pkl-file
+2024-06-29 22:03:02,202 - root - INFO - ...SUCCESS: logistic classification report saved
+2024-06-29 22:03:02,418 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 22:09:42,480 - root - INFO - SUCCESS (import_data): Data imported from data/bank_data.csv
+2024-06-29 22:09:42,481 - root - INFO - Testing import_data: SUCCESS - Data imported.
+2024-06-29 22:09:42,496 - root - INFO - SUCCESS (create_target): Target variable Churn created
+2024-06-29 22:09:42,497 - root - INFO - Testing create_target: SUCCESS - Created target 'churn'.
+2024-06-29 22:09:42,852 - root - INFO - ...SUCCESS: Churn distribution plot saved
+2024-06-29 22:09:43,225 - root - INFO - ...SUCCESS: Customer age distribution plot saved
+2024-06-29 22:09:45,366 - root - INFO - ...SUCCESS: Correlation heatmap plot saved
+2024-06-29 22:09:45,554 - root - INFO - ...SUCCESS: Marital status distribution plot saved
+2024-06-29 22:09:45,935 - root - INFO - ...SUCCESS: Total transaction distribution plot saved
+2024-06-29 22:09:45,936 - root - INFO - SUCCESS: Churn_Distribution.png created and saved.
+2024-06-29 22:09:45,936 - root - INFO - SUCCESS: Customer_Age_Distribution.png created and saved.
+2024-06-29 22:09:45,936 - root - INFO - SUCCESS: Correlation_Heatmap.png created and saved.
+2024-06-29 22:09:45,936 - root - INFO - SUCCESS: Marital_Status_Distribution.png created and saved.
+2024-06-29 22:09:45,936 - root - INFO - SUCCESS: Total_Transaction_Distribution.png created and saved.
+2024-06-29 22:09:45,946 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Gender
+2024-06-29 22:09:45,954 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Education_Level
+2024-06-29 22:09:45,964 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Marital_Status
+2024-06-29 22:09:45,974 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Income_Category
+2024-06-29 22:09:45,986 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Card_Category
+2024-06-29 22:09:45,989 - root - INFO - Testing encoder_helper: SUCCESS - Only numerical values present.
+2024-06-29 22:09:46,015 - root - INFO - SUCCESS (perform_feature_engineering): Feature scaling & train-test split completed
+2024-06-29 22:09:46,016 - root - INFO - Testing perform_feature_engineering: SUCCESS - Data split.
+2024-06-29 22:09:46,018 - root - INFO - Testing classification_report_image: SUCCESS - Class. report images created.
+2024-06-29 22:09:46,020 - root - INFO - SUCCESS (_setup_param_grids): Initialized Random Forest model and grid search parameter grid
+2024-06-29 22:09:46,020 - root - INFO - SUCCESS (_setup_param_grids): Initialized Logistic Regression model and grid search parameter grid
+2024-06-29 22:10:41,145 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 22:10:41,374 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 22:10:41,538 - root - INFO - SUCCESS (train_models): rfc model trained and saved as pkl-file
+2024-06-29 22:10:41,787 - root - INFO - ...SUCCESS: rfc classification report saved
+2024-06-29 22:10:42,129 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 22:14:52,269 - root - INFO - SUCCESS (feature_importance_plot): Feature importance plot saved
+2024-06-29 22:14:53,164 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 22:14:53,166 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 22:14:53,169 - root - INFO - SUCCESS (train_models): logistic model trained and saved as pkl-file
+2024-06-29 22:14:53,419 - root - INFO - ...SUCCESS: logistic classification report saved
+2024-06-29 22:14:53,659 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 22:22:32,949 - root - INFO - SUCCESS (import_data): Data imported from data/bank_data.csv
+2024-06-29 22:22:32,957 - root - INFO - SUCCESS (create_target): Target variable Churn created
+2024-06-29 22:22:33,227 - root - INFO - ...SUCCESS: Churn distribution plot saved
+2024-06-29 22:22:33,585 - root - INFO - ...SUCCESS: Customer age distribution plot saved
+2024-06-29 22:22:35,700 - root - INFO - ...SUCCESS: Correlation heatmap plot saved
+2024-06-29 22:22:35,910 - root - INFO - ...SUCCESS: Marital status distribution plot saved
+2024-06-29 22:22:36,279 - root - INFO - ...SUCCESS: Total transaction distribution plot saved
+2024-06-29 22:22:36,288 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Gender
+2024-06-29 22:22:36,295 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Education_Level
+2024-06-29 22:22:36,302 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Marital_Status
+2024-06-29 22:22:36,312 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Income_Category
+2024-06-29 22:22:36,322 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Card_Category
+2024-06-29 22:22:36,340 - root - INFO - SUCCESS (perform_feature_engineering): Feature scaling & train-test split completed
+2024-06-29 22:22:36,340 - root - INFO - SUCCESS (_setup_param_grids): Initialized Random Forest model and grid search parameter grid
+2024-06-29 22:22:36,340 - root - INFO - SUCCESS (_setup_param_grids): Initialized Logistic Regression model and grid search parameter grid
+2024-06-29 22:23:36,901 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 22:23:37,176 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 22:23:37,431 - root - INFO - SUCCESS (train_models): rfc model trained and saved as pkl-file
+2024-06-29 22:23:37,842 - root - INFO - ...SUCCESS: rfc classification report saved
+2024-06-29 22:23:38,339 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 22:27:54,941 - root - INFO - SUCCESS (feature_importance_plot): Feature importance plot saved
+2024-06-29 22:27:56,319 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 22:27:56,320 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 22:27:56,325 - root - INFO - SUCCESS (train_models): logistic model trained and saved as pkl-file
+2024-06-29 22:27:56,554 - root - INFO - ...SUCCESS: logistic classification report saved
+2024-06-29 22:27:56,790 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 22:39:19,403 - root - INFO - Testing import_data: SUCCESS - Data imported.
+2024-06-29 22:39:19,411 - root - INFO - SUCCESS (create_target): Target variable Churn created
+2024-06-29 22:39:19,412 - root - INFO - Testing create_target: SUCCESS - Created target 'churn'.
+2024-06-29 22:39:19,894 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Gender
+2024-06-29 22:39:19,898 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Education_Level
+2024-06-29 22:39:19,902 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Marital_Status
+2024-06-29 22:39:19,906 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Income_Category
+2024-06-29 22:39:19,909 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Card_Category
+2024-06-29 22:39:19,911 - root - INFO - Testing encoder_helper: SUCCESS - Only numerical values present.
+2024-06-29 22:39:19,923 - root - INFO - SUCCESS (perform_feature_engineering): Feature scaling & train-test split completed
+2024-06-29 22:39:19,924 - root - INFO - Testing perform_feature_engineering: SUCCESS - Data split.
+2024-06-29 22:39:19,926 - root - ERROR - Testing classification_report_image: ERROR - Class. report images not created.
+2024-06-29 22:39:20,028 - root - ERROR - Testing train_models: ERROR - Models not saved.
+2024-06-29 22:41:23,589 - root - INFO - Testing import_data: SUCCESS - Data imported.
+2024-06-29 22:41:23,600 - root - INFO - SUCCESS (create_target): Target variable Churn created
+2024-06-29 22:41:23,601 - root - INFO - Testing create_target: SUCCESS - Created target 'churn'.
+2024-06-29 22:41:24,101 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Gender
+2024-06-29 22:41:24,105 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Education_Level
+2024-06-29 22:41:24,109 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Marital_Status
+2024-06-29 22:41:24,112 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Income_Category
+2024-06-29 22:41:24,116 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Card_Category
+2024-06-29 22:41:24,118 - root - INFO - Testing encoder_helper: SUCCESS - Only numerical values present.
+2024-06-29 22:41:24,130 - root - INFO - SUCCESS (perform_feature_engineering): Feature scaling & train-test split completed
+2024-06-29 22:41:24,131 - root - INFO - Testing perform_feature_engineering: SUCCESS - Data split.
+2024-06-29 22:41:24,133 - root - ERROR - Testing classification_report_image: ERROR - Class. report images not created.
+2024-06-29 22:41:24,237 - root - ERROR - Testing train_models: ERROR - Models not saved.
+2024-06-29 22:42:58,163 - root - INFO - SUCCESS (import_data): Data imported from data/bank_data.csv
+2024-06-29 22:42:58,168 - root - INFO - Testing import_data: SUCCESS - Data imported.
+2024-06-29 22:42:58,178 - root - INFO - SUCCESS (create_target): Target variable Churn created
+2024-06-29 22:42:58,179 - root - INFO - Testing create_target: SUCCESS - Created target 'churn'.
+2024-06-29 22:42:58,539 - root - INFO - ...SUCCESS: Churn distribution plot saved
+2024-06-29 22:42:58,871 - root - INFO - ...SUCCESS: Customer age distribution plot saved
+2024-06-29 22:43:01,267 - root - INFO - ...SUCCESS: Correlation heatmap plot saved
+2024-06-29 22:43:01,472 - root - INFO - ...SUCCESS: Marital status distribution plot saved
+2024-06-29 22:43:01,754 - root - INFO - ...SUCCESS: Total transaction distribution plot saved
+2024-06-29 22:43:01,754 - root - INFO - SUCCESS: Churn_Distribution.png created and saved.
+2024-06-29 22:43:01,754 - root - INFO - SUCCESS: Customer_Age_Distribution.png created and saved.
+2024-06-29 22:43:01,755 - root - INFO - SUCCESS: Correlation_Heatmap.png created and saved.
+2024-06-29 22:43:01,755 - root - INFO - SUCCESS: Marital_Status_Distribution.png created and saved.
+2024-06-29 22:43:01,755 - root - INFO - SUCCESS: Total_Transaction_Distribution.png created and saved.
+2024-06-29 22:43:01,763 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Gender
+2024-06-29 22:43:01,769 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Education_Level
+2024-06-29 22:43:01,773 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Marital_Status
+2024-06-29 22:43:01,778 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Income_Category
+2024-06-29 22:43:01,785 - root - INFO - SUCCESS (encoder_helper): One-hot encoded and removed Card_Category
+2024-06-29 22:43:01,788 - root - INFO - Testing encoder_helper: SUCCESS - Only numerical values present.
+2024-06-29 22:43:01,801 - root - INFO - SUCCESS (perform_feature_engineering): Feature scaling & train-test split completed
+2024-06-29 22:43:01,802 - root - INFO - Testing perform_feature_engineering: SUCCESS - Data split.
+2024-06-29 22:43:01,803 - root - INFO - Testing classification_report_image: SUCCESS - Class. report images created.
+2024-06-29 22:43:01,805 - root - INFO - SUCCESS (_setup_param_grids): Initialized Random Forest model and grid search parameter grid
+2024-06-29 22:43:01,806 - root - INFO - SUCCESS (_setup_param_grids): Initialized Logistic Regression model and grid search parameter grid
+2024-06-29 22:43:16,264 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 22:43:16,328 - root - INFO - SUCCESS (model_inference): rfc model inference to features was successfull
+2024-06-29 22:43:16,453 - root - INFO - SUCCESS (train_models): rfc model trained and saved as pkl-file
+2024-06-29 22:43:16,696 - root - INFO - ...SUCCESS: rfc classification report saved
+2024-06-29 22:43:16,962 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 22:43:20,402 - root - INFO - SUCCESS (feature_importance_plot): Feature importance plot saved
+2024-06-29 22:43:20,429 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 22:43:20,430 - root - INFO - SUCCESS (model_inference): logistic model inference to features was successfull
+2024-06-29 22:43:20,433 - root - INFO - SUCCESS (train_models): logistic model trained and saved as pkl-file
+2024-06-29 22:43:20,770 - root - INFO - ...SUCCESS: logistic classification report saved
+2024-06-29 22:43:20,990 - root - INFO - SUCCESS (_calculate_accuracy): Calculated overall accuracy successfull
+2024-06-29 22:43:26,157 - root - INFO - SUCCESS (feature_importance_plot): Feature importance plot saved
+2024-06-29 22:43:26,158 - root - INFO - Testing feature_importance_plot: SUCCESS - Feature importance plot created.
+2024-06-29 22:43:26,161 - root - INFO - Testing train_models: SUCCESS - Models trained and saved.

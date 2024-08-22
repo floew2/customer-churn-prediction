@@ -1,176 +1,228 @@
-'''
+# churn_script_logging_and_tests.py
+
+"""
 Module containing unit tests for the churn_library.py functions.
-It logs SUCCESS, ERROR, and INFO related messages.
+It logs ERROR and INFO related messages.
 
 Author: Fabian Löw
-Date: 27 June 2023
-'''
+Date: 29 June 2024
+"""
 
-# Load libraries
 import os
 import logging
-import churn_library as clb
-from churn_library import DATA_PATH, CAT_COLUMNS, EDA_IMAGES_PATH, \
-MODELS_PATH, RESULTS_PATH, RESPONSE, KEEP_COLUMNS
+import joblib
+import pandas as pd
+import pytest
+import constants as const
+from churn_library import ChurnLibrary
 
-# Set up logging configuration
+# Set up a logging configuration
 logging.basicConfig(
-    filename='logs/churn_library.log',
+    filename='logs/churn_library_tests.log',
     level=logging.INFO,
     filemode='w',
-    format='%(name)s - %(levelname)s - %(message)s')
+    format='%(name)s - %(asctime)s - %(levelname)s - %(message)s')
+
+churn_lib = ChurnLibrary(const)
 
 
-def test_import(data_path):
-    '''
-    Test test_import() function.
-    '''
+@pytest.fixture(scope="module")
+def data_set():
+    """Fixture for loading data."""
+    df = churn_lib.import_data(const.DATA_PATH, const.KEEP_COLUMNS)
+    df = df.sample(frac=0.1, random_state=42)
+    return df
+
+
+@pytest.fixture(scope="module")
+def target_data_set(data_set):
+    """Fixture for creating target data."""
+    return churn_lib.create_target(data_set)
+
+
+@pytest.fixture(scope="module")
+def encoded_data_set(target_data_set):
+    """Fixture for encoding categorical variables."""
+    return churn_lib.encoder_helper(target_data_set, const.CAT_COLUMNS)
+
+
+@pytest.fixture(scope="module")
+def feature_engineered_data_set(encoded_data_set):
+    """Fixture for performing feature engineering."""
+    return churn_lib.perform_feature_engineering(encoded_data_set, const.RESPONSE)
+
+
+@pytest.fixture(scope="module")
+def models(feature_engineered_data_set):
+    """Fixture for training models and loading them."""
+    X_train, X_test, y_train, y_test = feature_engineered_data_set
+    churn_lib.train_models(X_train, X_test, y_train, y_test)
+    rfc_model = joblib.load(const.MODELS_PATH + 'rfc_model.pkl')
+    lr_model = joblib.load(const.MODELS_PATH + 'logistic_model.pkl')
+    return rfc_model, lr_model, X_train, X_test, y_train, y_test
+
+
+def test_import(data_set):
+    """
+    Test import_data() function.
+    """
     try:
-        data = clb.import_data(data_path)
         logging.info("Testing import_data: SUCCESS - Data imported.")
-        return data
+        assert data_set.shape[0] > 0 and data_set.shape[1] > 0
+        assert all(column in data_set.columns for column in const.KEEP_COLUMNS)
+        assert data_set.dtypes['Customer_Age'] == 'int64'
+        assert not data_set.isnull().values.any(), "Data contains missing values."
     except FileNotFoundError as err:
-        logging.error("Testing import_eda: ERROR - The file wasn't imported.")
+        logging.error("Testing import_data: ERROR - The file wasn't imported.")
         raise err
-
-    try:
-        assert data.shape[0] > 0
-        assert data.shape[1] > 0
     except AssertionError as err:
         logging.error(
-            "Testing import_data: ERROR - The file doesn't appear to have rows and columns.")
+            "Testing import_data: ERROR - Data validation failed.")
         raise err
 
-def test_create_target(dataframe, response):
-    '''
+
+def test_create_target(data_set, target_data_set):
+    """
     Test create_target() function.
-    '''
+    """
     try:
-        data_with_target = clb.create_target(dataframe, response)
-        logging.info("Testing create_target: SUCCESS - Created target 'churn'.")
-        return data_with_target
-    except FileNotFoundError as err:
-        logging.error("Testing create_target: ERROR - The target wasn't created.")
+        logging.info(
+            "Testing create_target: SUCCESS - Created target 'churn'.")
+        assert const.RESPONSE in target_data_set.columns.tolist()
+        assert len(data_set) == len(target_data_set)
+        assert target_data_set[const.RESPONSE].nunique() == 2, "Target variable should have two unique values."
+    except KeyError as err:
+        logging.error(
+            "Testing create_target: ERROR - Response column not found.")
         raise err
-
-    try:
-        assert response in data_with_target.columns.tolist()
-        logging.info(f"Testing create_target: SUCCESS - code \
-        generated {response} column.")
-    except FileNotFoundError as err:
-        logging.error("Testing create_target: ERROR - code did not \
-        generate {response} column.")
-        raise err
-
-
-def test_eda(dataframe):
-    '''
-    Test test_eda() function.
-    '''
-    try:
-        clb.perform_eda(dataframe)
-
-        # Try open previously crerated images
-        image_lst = [
-            "Barplot_Marital_Status.png",
-            "Heatmap_Correlation.png",
-            "Histogram_Customer_Age.png",
-            "Histogram_Existing_Customer.png",
-            "Histplot_Kde_Total_Trans_Ct.png",
-        ]
-        for image in image_lst:
-            assert os.path.exists(EDA_IMAGES_PATH + image)
-            logging.info(f"Testing perform_eda: SUCCESS - Created {image}.")
     except AssertionError as err:
         logging.error(
-            f"Testing perform_eda: ERROR - Could not found the {image} image")
+            "Testing create_target: ERROR - Target variable not created or data length mismatch.")
         raise err
 
 
-def test_encoder_helper(dataframe, category_lst, response):
-    '''
-    Test test_encoder_helper() function.
-    '''
-
-    new_columns = ['Gender_Churn',
-                   'Education_Level_Churn',
-                   'Marital_Status_Churn',
-                   'Income_Category_Churn',
-                   'Card_Category_Churn']
-
+def test_perform_eda(target_data_set):
+    """
+    Test perform_eda() function.
+    """
     try:
-        dataframe = clb.encoder_helper(dataframe, category_lst, response)
-        for column in new_columns:
-            assert column in dataframe.columns.tolist()
-            logging.info(f"SUCCESS: encoder generated {column} column.")
-        return dataframe
-    except AssertionError:
-        logging.error("ERROR: One or more columns are missing from encoding.")
-
-
-def test_perform_feature_engineering(dataframe, keep_columns, response):
-    '''
-    Test test_perform_feature_engineering() function.
-    '''
-    try:
-        train_feature, testing_feature, train_label, test_label = clb.perform_feature_engineering(
-            dataframe, keep_columns, response)
-        assert len(train_feature) == len(train_label)
-        assert len(testing_feature) == len(test_label)
-        logging.info("Testing perform_feature_engineering: SUCCESS")
-        return train_feature, testing_feature, train_label, test_label
-    except AssertionError as err:
-        logging.info("Testing perform_feature_engineering: \
-           ERROR - Feature and Target should have the same lenght")
-        raise err
-
-
-def test_train_models(train_feature, testing_feature, train_label, test_label):
-    '''
-    Test test_train_models() function.
-    '''
-    try:
-        clb.train_models(
-            train_feature,
-            testing_feature,
-            train_label,
-            test_label)
+        churn_lib.perform_eda(target_data_set, const.CAT_COLUMNS)
         image_lst = [
-            "classification_report_LR.png",
-            "classification_report_RF.png",
-            "RF_feature_importance_plot.png",
-            "roc_curve_result.png"
+            "Churn_Distribution.png",
+            "Customer_Age_Distribution.png",
+            "Correlation_Heatmap.png",
+            "Marital_Status_Distribution.png",
+            "Total_Transaction_Distribution.png"
         ]
         for image in image_lst:
-            assert os.path.exists(RESULTS_PATH + image)
-        logging.info("Testing train_models: SUCCESS - Classification \
-        reports and feature importance statistics calculated.")
+            path = os.path.join(const.EDA_IMAGES_PATH, image)
+            assert os.path.exists(path)
+            assert os.path.getsize(path) > 0
+            logging.info(f"SUCCESS: {image} created and saved.")
     except AssertionError as err:
-        logging.info(
-            f"Testing train_models: The {image} is not found")
+        logging.error(f"ERROR: {image} not found or empty.")
+        raise err
+    except Exception as err:
+        logging.error(f"ERROR: perform_eda failed with error: {str(err)}")
         raise err
 
+
+def test_encoder_helper(encoded_data_set):
+    """
+    Test encoder_helper() function.
+    """
     try:
-        model_lst = ["logistic_model_v2.pkl", "rfc_model_v2.pkl"]
-        for model in model_lst:
-            assert os.path.exists(MODELS_PATH + model)
+        # Ensure all values in the encoded DataFrame are numerical
+        for column in encoded_data_set.columns:
+            assert pd.api.types.is_numeric_dtype(encoded_data_set[column]), \
+                f"Column '{column}' contains non-numerical values."
+
+        # Ensure all original categorical columns have their corresponding encoded columns
+        for col in const.CAT_COLUMNS:
+            assert any(col in col_name for col_name in encoded_data_set.columns), \
+                f"Encoded column for '{col}' not found."
+
+        logging.info("Testing encoder_helper: SUCCESS - Only numerical values present.")
     except AssertionError as err:
-        logging.info("Testing train_models: ERROR - could not found \
-        all the models")
+        logging.error("Testing encoder_helper: ERROR - Non-numerical values found in encoded data.")
+        raise err
+    except Exception as err:
+        logging.error(f"Testing encoder_helper: ERROR - {str(err)}")
         raise err
 
 
-if __name__ == "__main__":
-    data_frame = test_import(DATA_PATH)
-    data_frame = test_create_target(data_frame, RESPONSE)
-    test_eda(data_frame)
-    data_frame = test_encoder_helper(data_frame,
-                                     CAT_COLUMNS,
-                                     RESPONSE)
-    x_training, x_testing, y_training, y_testing = test_perform_feature_engineering(data_frame,
-                                                                                    KEEP_COLUMNS,
-                                                                                    RESPONSE)
-    test_train_models(x_training,
-                      x_testing,
-                      y_training,
-                      y_testing)
+def test_perform_feature_engineering(feature_engineered_data_set):
+    """
+    Test perform_feature_engineering() function.
+    """
+    try:
+        X_train, X_test, y_train, y_test = feature_engineered_data_set
+        assert X_train.shape[0] > 0 and X_test.shape[0] > 0
+        assert y_train.shape[0] > 0 and y_test.shape[0] > 0
+        assert X_train.shape[1] == X_test.shape[1], "Feature count mismatch between train and test sets."
+        logging.info(
+            "Testing perform_feature_engineering: SUCCESS - Data split.")
+    except KeyError as err:
+        logging.error(
+            "Testing perform_feature_engineering: ERROR - Column not found.")
+        raise err
+    except AssertionError as err:
+        logging.error(
+            "Testing perform_feature_engineering: ERROR - Data not split correctly.")
+        raise err
+
+
+def test_classification_report_image():
+    """
+    Test classification_report_image() function.
+    """
+    try:
+        assert os.path.exists(
+            os.path.join(const.RESULTS_PATH, 'logistic_model_classification_report.png'))
+        assert os.path.exists(
+            os.path.join(const.RESULTS_PATH, 'rfc_model_classification_report.png'))
+        logging.info(
+            "Testing classification_report_image: SUCCESS - Class. report images created.")
+    except AssertionError as err:
+        logging.error(
+            "Testing classification_report_image: ERROR - Class. report images not created.")
+        raise err
+
+
+
+def test_feature_importance_plot(models):
+    """
+    Test feature_importance_plot() function.
+    """
+    try:
+        rfc_model, _, X_train, _, _, _ = models
+        churn_lib.feature_importance_plot(rfc_model, X_train)
+        assert os.path.exists(
+            os.path.join(const.RESULTS_PATH, 'random_forest_feature_importance.png'))
+        logging.info(
+            "Testing feature_importance_plot: SUCCESS - Feature importance plot created.")
+    except AssertionError as err:
+        logging.error(
+            "Testing feature_importance_plot: ERROR - Feature importance plot not created.")
+        raise err
+
+
+
+def test_train_models(models):
+    """
+    Test train_models() function.
+    """
+    try:
+        assert os.path.exists(
+            os.path.join(const.MODELS_PATH, 'rfc_model.pkl'))
+        assert os.path.exists(
+            os.path.join(const.MODELS_PATH, 'logistic_model.pkl'))
+        logging.info(
+            "Testing train_models: SUCCESS - Models trained and saved.")
+    except AssertionError as err:
+        logging.error("Testing train_models: ERROR - Models not saved.")
+        raise err
+
+
+if __name__ == '__main__':
+    pytest.main()

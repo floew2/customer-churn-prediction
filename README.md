@@ -1,23 +1,26 @@
 # Predict Customer Churn
 
-Project **Predict Customer Churn**
+Project **Predict Customer Churn** of ML DevOps Engineer Nanodegree Udacity
 
 ## Project Description
+
+This project aims to predict customer churn using machine learning models. Customer churn refers to when customers stop doing business with a company. Understanding and predicting churn can help businesses take proactive steps to retain customers.
 
 The workflow reads a csv-file with different attributes of more than 10,000
 customers. The workflow calibrates and evaluates two machine learning (ML) algorithms,
 random forest (RF) and linear regression (LR). It creates various figures to inform 
-about the performance of these algorithms. Finally, the workflow creates a prediction
+about the perforamnce of these algorithms. Finally, the workflow creates a prediction
 about customers churning or not. The workflow includes unit testing and logging.
 
-The workflow consists of five steps:
+## Project structure
 
-- EDA
-- Feature Engineering (including encoding of categorical variables)
-- Model Training
-- Prediction
-- Model Evaluation
+The project consists of the following key steps:
 
+- **Exploratory Data Analysis (EDA)**: Understand the data through visualization.
+- **Feature Engineering**: Prepare data for modeling, including encoding categorical variables.
+- **Model Training**: Train machine learning models.
+- **Prediction**: Generate predictions on customer churn.
+- **Model Evaluation**: Evaluate model performance.
 
 ## Files and data description
 
@@ -34,6 +37,8 @@ Overview of the most important files and data present in the root directory:
 
 - Files:
   - `churn_library.py`: A library of functions to find customers who are likely to churn, based on machine learning.
+  - `churn_notebook.ipynb`: Contains the original workflow to identify credit card customers that are most likely to churn, but without implementing the engineering and software best practices.
+  - `Guide.ipynb`: The starting point for the project with relevant information and instructions
   - `churn_script_logging_and_tests.py`: Contains the unit tests for the functions in churn_library.py
 
 
@@ -42,6 +47,7 @@ The project repository has the following structure:
 ```
 .
 ├── churn_library.py        --------> This file contains the functions to the churn model
+├── churn_notebook.ipynb    --------> Jupyter notebook from churn model 
 ├── churn_script_logging_and_tests.py  ------> This file contains the tests functions to test churn functions
 ├── data
 │   └── bank_data.csv   ------> data in *.csv format
@@ -95,10 +101,14 @@ All log messages (success or error) from the implemented unit tests will be save
 
 ## Dependencies
 
-- Python 3.7
-- Pandas 1.2.4
-- Scikit-learn 0.24.2
-- Matplotlib 3.4.2
-- Seaborn 0.11.1
-- Shap 0.39.0
-- Joblib 1.0.1
+- Python 3.8
+- scikit-learn 0.24.1
+- shap 0.40.0
+- joblib 1.0.1
+- pandas 1.2.4
+- numpy 1.20.1
+- matplotlib 3.3.4
+- seaborn 0.11.2
+- pylint 2.7.4
+- autopep8 1.5.6
+- pytest 6.2.3
